@@ -1,2 +1,2 @@
 require("config.lazy")
-vim.cmd[[colorscheme eldritch]]
+vim.cmd([[colorscheme eldritch]])
