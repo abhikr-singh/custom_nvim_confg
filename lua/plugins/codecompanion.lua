@@ -3,6 +3,7 @@ return {
 		"olimorris/codecompanion.nvim", -- The KING of AI programming
 		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 		dependencies = {},
+		enabled = false,
 		opts = {
 			adapters = {
 				http = {
