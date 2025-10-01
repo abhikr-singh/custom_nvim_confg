@@ -165,28 +165,28 @@ return {
 
 			require("dap-python").setup(python_path)
 
-			-- Keymaps
-			-- vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
-			-- vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
-			-- vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
-			-- vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
-			-- vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-			-- vim.keymap.set("n", "<leader>B", function()
-			-- 	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			-- end, { desc = "Debug: Conditional Breakpoint" })
-			-- vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
-			-- vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Debug: Run Last" })
-			--
-			-- vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Debug: Toggle DAP UI" })
-			-- vim.keymap.set("n", "<leader>dd", function()
-			-- 	dap.run({
-			-- 		type = "python",
-			-- 		request = "launch",
-			-- 		name = "Launch file",
-			-- 		program = vim.fn.expand("%:p"), -- current file
-			-- 		console = "externalTerminal",
-			-- 	})
-			-- end, { desc = "Debug: Run Current File" })
+			local icons = {
+				Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+				Breakpoint = " ",
+				BreakpointCondition = " ",
+				BreakpointRejected = { " ", "DiagnosticError" },
+				LogPoint = ".>",
+			}
+
+			for name, sign in pairs(icons) do
+				sign = type(sign) == "table" and sign or { sign }
+				vim.fn.sign_define(
+					"Dap" .. name,
+					{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+				)
+			end
+
+			-- setup dap config by VsCode launch.json file
+			local vscode = require("dap.ext.vscode")
+			local json = require("plenary.json")
+			vscode.json_decode = function(str)
+				return vim.json.decode(json.json_strip_comments(str))
+			end
 		end,
 	},
 }
