@@ -35,5 +35,49 @@ return {
 			sign = false,
 			icons = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
 		},
+		latex = {
+			-- install sudo pacman -S python-pylatexenc
+			enabled = true,
+
+			-- Render $...$ and $$...$$
+			render_inline = true,
+			render_block = true,
+
+			-- Fancy unicode replacements
+			symbols = {
+				enabled = true,
+			},
+
+			position = "above",
+			top_pad = 1,
+
+			-- Highlight for LaTeX
+			highlight = "RenderMarkdownMath",
+		},
 	},
+	config = function()
+		-- make bold text colored
+		vim.api.nvim_set_hl(0, "@markup.strong", {
+			fg = "#ff9e64",
+			bold = true,
+			italic = false,
+			underline = false,
+		})
+
+		-- re-apply after colorscheme changes
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				vim.api.nvim_set_hl(0, "@markup.strong", {
+					fg = "#ff9e64",
+					bold = true,
+				})
+			end,
+		})
+
+		-- math color
+		vim.api.nvim_set_hl(0, "RenderMarkdownMath", {
+			fg = "#7dcfff", -- cyan math
+			italic = true,
+		})
+	end,
 }
