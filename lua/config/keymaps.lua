@@ -4,3 +4,4 @@ vim.keymap.set("n", "<esc>", ":noh<CR><esc>", { desc = "Clear search highlights"
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa!<CR>", { desc = "Quit Neovim" })
+vim.keymap.set({ "n", "v" }, "<leader>st", require("stay-centered").toggle, { desc = "Toggle stay-centered.nvim" })

@@ -31,10 +31,10 @@ return {
 				scope_highlight = nil,
 			},
 		},
-		heading = {
-			sign = false,
-			icons = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
-		},
+		-- heading = {
+		-- 	sign = false,
+		-- 	icons = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
+		-- },
 		latex = {
 			-- install sudo pacman -S python-pylatexenc
 			enabled = true,
